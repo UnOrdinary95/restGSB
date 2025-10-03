@@ -16,13 +16,21 @@
 
 class PdoGsbRapports{   		
       	 /*--------------------Version locale---------------------------------------- */
-    
-      private static $serveur='mysql:host=localhost';
-      private static $bdd='dbname=gsbrapports';   		
-      private static $user='root' ;    		
-      private static $mdp='' ;
-      private static $monPdo;
-      private static $monPdoGsbRapports = null;
+	private static $serveur;
+	private static $bdd;
+	private static $user;
+	private static $mdp;
+	private static $monPdo;
+	private static $monPdoGsbRapports = null;
+
+	public static function init()
+	{
+    	self::$serveur = 'mysql:host=' . getenv('DB_HOST');
+    	self::$bdd = 'dbname=' . getenv('DB_NAME_GSB');
+    	self::$user = getenv('DB_USERNAME');
+        self::$mdp = getenv('DB_PASSWORD2');
+    	}
+
 /**
  * Constructeur privé, crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe

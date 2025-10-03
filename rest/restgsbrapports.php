@@ -32,6 +32,7 @@ class RestGSB extends Rest {
      */
     public function __construct() {
         // Appel du constructeur de la classe mère
+        PdoGsbRapports::init();
         parent :: __construct();
       
         // Vérifie qu'une ressource a bien été demandée
