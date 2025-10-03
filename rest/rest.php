@@ -77,6 +77,21 @@ abstract class Rest {
                 $this->response('Methode non autorisée', 405);   // Method Not Allowed
                 break;
         }
+        
+        /* Extrait la ressource depuis REQUEST_URI */
+        $uri = $_SERVER['REQUEST_URI'];
+        $scriptName = $_SERVER['SCRIPT_NAME'];
+        
+        // Enlève le nom du script de l'URI pour obtenir la ressource
+        $ressource = str_replace($scriptName, '', $uri);
+        
+        // Enlève les paramètres de requête (après ?)
+        if (($pos = strpos($ressource, '?')) !== false) {
+            $ressource = substr($ressource, 0, $pos);
+        }
+        
+        // Nettoie les slashes au début et à la fin
+        $this->request['ressource'] = trim($ressource, '/');
     }
 
     /**
